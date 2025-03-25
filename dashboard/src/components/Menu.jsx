@@ -13,6 +13,7 @@ const Menu = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
+  // class
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
 
