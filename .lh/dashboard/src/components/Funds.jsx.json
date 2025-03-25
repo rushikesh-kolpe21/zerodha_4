@@ -1,0 +1,18 @@
+{
+    "sourceFile": "dashboard/src/components/Funds.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1742829140875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1742829140875,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\nimport { Link } from \"react-router-dom\";\r\n\r\nconst Funds = () => {\r\n  return (\r\n    <>\r\n      <div className=\"funds\">\r\n        <p>Instant, zero-cost fund transfers with UPI </p>\r\n        <Link className=\"btn btn-green\">Add funds</Link>\r\n        <Link className=\"btn btn-blue\">Withdraw</Link>\r\n      </div>\r\n\r\n      <div className=\"row\">\r\n        <div className=\"col\">\r\n          <span>\r\n            <p>Equity</p>\r\n          </span>\r\n\r\n          <div className=\"table\">\r\n            <div className=\"data\">\r\n              <p>Available margin</p>\r\n              <p className=\"imp colored\">4,043.10</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Used margin</p>\r\n              <p className=\"imp\">3,757.30</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Available cash</p>\r\n              <p className=\"imp\">4,043.10</p>\r\n            </div>\r\n            <hr />\r\n            <div className=\"data\">\r\n              <p>Opening Balance</p>\r\n              <p>4,043.10</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Opening Balance</p>\r\n              <p>3736.40</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Payin</p>\r\n              <p>4064.00</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>SPAN</p>\r\n              <p>0.00</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Delivery margin</p>\r\n              <p>0.00</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Exposure</p>\r\n              <p>0.00</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Options premium</p>\r\n              <p>0.00</p>\r\n            </div>\r\n            <hr />\r\n            <div className=\"data\">\r\n              <p>Collateral (Liquid funds)</p>\r\n              <p>0.00</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Collateral (Equity)</p>\r\n              <p>0.00</p>\r\n            </div>\r\n            <div className=\"data\">\r\n              <p>Total Collateral</p>\r\n              <p>0.00</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <div className=\"col\">\r\n          <div className=\"commodity\">\r\n            <p>You don't have a commodity account</p>\r\n            <Link className=\"btn btn-blue\">Open Account</Link>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default Funds;"
+        }
+    ]
+}

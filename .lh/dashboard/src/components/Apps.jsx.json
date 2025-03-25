@@ -1,0 +1,18 @@
+{
+    "sourceFile": "dashboard/src/components/Apps.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1742829547169,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1742829547169,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\n\r\nconst Apps = () => {\r\n  return <h1>Apps</h1>;\r\n};\r\n\r\nexport default Apps;"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "dashboard/src/components/TopBar.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1742828737837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1742828737837,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\n\r\nimport Menu from \"./Menu\";\r\n\r\nconst TopBar = () => {\r\n  return (\r\n    <div className=\"topbar-container\">\r\n      <div className=\"indices-container\">\r\n        <div className=\"nifty\">\r\n          <p className=\"index\">NIFTY 50</p>\r\n          <p className=\"index-points\">{100.2} </p>\r\n          <p className=\"percent\"> </p>\r\n        </div>\r\n        <div className=\"sensex\">\r\n          <p className=\"index\">SENSEX</p>\r\n          <p className=\"index-points\">{100.2}</p>\r\n          <p className=\"percent\"></p>\r\n        </div>\r\n      </div>\r\n\r\n      <Menu />\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default TopBar;"
+        }
+    ]
+}

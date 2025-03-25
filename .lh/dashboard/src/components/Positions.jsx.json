@@ -1,0 +1,38 @@
+{
+    "sourceFile": "dashboard/src/components/Positions.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1742829140874,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742870038752,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n import React from \"react\";\r\n+import { positions } from \"../data/data\";\r\n \r\n const Positions = () => {\r\n   return (\r\n     <>\r\n-      <h3 className=\"title\">Positions (2)</h3>\r\n+      <h3 className=\"title\">Positions ({positions.length})</h3>\r\n \r\n       <div className=\"order-table\">\r\n         <table>\r\n           <tr>\r\n@@ -15,8 +16,31 @@\n             <th>LTP</th>\r\n             <th>P&L</th>\r\n             <th>Chg.</th>\r\n           </tr>\r\n+\r\n+          {pos.map((stock, index)=>{\r\n+             const currValue = stock.price * stock.qty;\r\n+             const isProfit = currValue - stock.avg * stock.qty >= 0.0;\r\n+             const profClass = isProfit ? \"profit\" : \"loss\";\r\n+             const dayClass = stock.isLoss ? \"loss\" : \"profit\";    \r\n+             \r\n+             return(\r\n+                 <tr key={index}>\r\n+                  <td>{stock.product}</td>\r\n+                 <td>{stock.name}</td>\r\n+                 <td>{stock.qty}</td>\r\n+                 <td>{stock.avg.toFixed(2)}</td>\r\n+                 <td>{stock.price.toFixed(2)}</td>\r\n+                 <td>{currValue.toFixed(2)}</td>\r\n+                 <td className={profClass}>\r\n+                   {(currValue - stock.avg * stock.qty).toFixed(2)}\r\n+                 </td>\r\n+                 <td className={profClass}>{stock.net}</td>\r\n+                 <td className={dayClass}>{stock.day}</td>\r\n+               </tr>\r\n+             )\r\n+                    })}\r\n         </table>\r\n       </div>\r\n     </>\r\n   );\r\n"
+                },
+                {
+                    "date": 1742870141230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,13 +30,12 @@\n                  <td>{stock.name}</td>\r\n                  <td>{stock.qty}</td>\r\n                  <td>{stock.avg.toFixed(2)}</td>\r\n                  <td>{stock.price.toFixed(2)}</td>\r\n-                 <td>{currValue.toFixed(2)}</td>\r\n+                 \r\n                  <td className={profClass}>\r\n                    {(currValue - stock.avg * stock.qty).toFixed(2)}\r\n                  </td>\r\n-                 <td className={profClass}>{stock.net}</td>\r\n                  <td className={dayClass}>{stock.day}</td>\r\n                </tr>\r\n              )\r\n                     })}\r\n"
+                },
+                {
+                    "date": 1742870183272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             <th>P&L</th>\r\n             <th>Chg.</th>\r\n           </tr>\r\n \r\n-          {pos.map((stock, index)=>{\r\n+          {positions.map((stock, index)=>{\r\n              const currValue = stock.price * stock.qty;\r\n              const isProfit = currValue - stock.avg * stock.qty >= 0.0;\r\n              const profClass = isProfit ? \"profit\" : \"loss\";\r\n              const dayClass = stock.isLoss ? \"loss\" : \"profit\";    \r\n"
+                },
+                {
+                    "date": 1742870720652,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             <th>P&L</th>\r\n             <th>Chg.</th>\r\n           </tr>\r\n \r\n-          {positions.map((stock, index)=>{\r\n+          {positions .map((stock, index)=>{\r\n              const currValue = stock.price * stock.qty;\r\n              const isProfit = currValue - stock.avg * stock.qty >= 0.0;\r\n              const profClass = isProfit ? \"profit\" : \"loss\";\r\n              const dayClass = stock.isLoss ? \"loss\" : \"profit\";    \r\n"
+                },
+                {
+                    "date": 1742872445722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n              const profClass = isProfit ? \"profit\" : \"loss\";\r\n              const dayClass = stock.isLoss ? \"loss\" : \"profit\";    \r\n              \r\n              return(\r\n-                 <tr key={index}>\r\n+                 <tr key={index}> \r\n                   <td>{stock.product}</td>\r\n                  <td>{stock.name}</td>\r\n                  <td>{stock.qty}</td>\r\n                  <td>{stock.avg.toFixed(2)}</td>\r\n"
+                }
+            ],
+            "date": 1742829140874,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\n\r\nconst Positions = () => {\r\n  return (\r\n    <>\r\n      <h3 className=\"title\">Positions (2)</h3>\r\n\r\n      <div className=\"order-table\">\r\n        <table>\r\n          <tr>\r\n            <th>Product</th>\r\n            <th>Instrument</th>\r\n            <th>Qty.</th>\r\n            <th>Avg.</th>\r\n            <th>LTP</th>\r\n            <th>P&L</th>\r\n            <th>Chg.</th>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default Positions;"
+        }
+    ]
+}

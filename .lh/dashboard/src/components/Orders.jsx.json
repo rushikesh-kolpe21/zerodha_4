@@ -1,0 +1,22 @@
+{
+    "sourceFile": "dashboard/src/components/Orders.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1742828964148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1742829140890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,18 @@\n-import React from 'react'\r\n+import React from \"react\";\r\n+import { Link } from \"react-router-dom\";\r\n \r\n-export default function Orders() {\r\n+const Orders = () => {\r\n   return (\r\n-    <div>\r\n-      Orders\r\n+    <div className=\"orders\">\r\n+      <div className=\"no-orders\">\r\n+        <p>You haven't placed any orders today</p>\r\n+\r\n+        <Link to={\"/\"} className=\"btn\">\r\n+          Get started\r\n+        </Link>\r\n+      </div>\r\n     </div>\r\n-  )\r\n-}\r\n+  );\r\n+};\r\n+\r\n+export default Orders;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1742828964148,
+            "name": "Commit-0",
+            "content": "import React from 'react'\r\n\r\nexport default function Orders() {\r\n  return (\r\n    <div>\r\n      Orders\r\n    </div>\r\n  )\r\n}\r\n"
+        }
+    ]
+}
