@@ -58,7 +58,6 @@ app.post("/newOrder", async (req, res) => {
   res.send(" Order saved! ");
 });
 
-
 // const initDb = async () => {
 //   await Position.insertMany(data.positions)
 //   console.log("data was initial")

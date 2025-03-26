@@ -1,0 +1,34 @@
+{
+    "sourceFile": "backend/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1742994737130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743000831154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,19 +45,19 @@\n   // console.log(allPosition);\r\n });\r\n \r\n // for adding new data\r\n-app.post(\"/newOrder\", async (req, res) =>{\r\n-  let newOrder =await new Order({\r\n-    name : req.body.name,\r\n-    qty :  req.body.number,\r\n-    price : req.body.price,\r\n-    mode : req.body.mode,\r\n-  })\r\n+app.post(\"/newOrder\", async (req, res) => {\r\n+  let newOrder = await new Order({\r\n+    name: req.body.name,\r\n+    qty: req.body.qty,  // Now matching the client property\r\n+    price: req.body.price,\r\n+    mode: req.body.mode,\r\n+  });\r\n \r\n   newOrder.save();\r\n-  res.send(\" Order saved! \")\r\n-})\r\n+  res.send(\" Order saved! \");\r\n+});\r\n \r\n // const initDb = async () => {\r\n //   await Position.insertMany(data.positions)\r\n //   console.log(\"data was initial\")\r\n"
+                },
+                {
+                    "date": 1743000859295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,19 +45,19 @@\n   // console.log(allPosition);\r\n });\r\n \r\n // for adding new data\r\n-app.post(\"/newOrder\", async (req, res) => {\r\n-  let newOrder = await new Order({\r\n-    name: req.body.name,\r\n-    qty: req.body.qty,  // Now matching the client property\r\n-    price: req.body.price,\r\n-    mode: req.body.mode,\r\n-  });\r\n+app.post(\"/newOrder\", async (req, res) =>{\r\n+  let newOrder =await new Order({\r\n+    name : req.body.name,\r\n+    qty :  req.body.number,\r\n+    price : req.body.price,\r\n+    mode : req.body.mode,\r\n+  })\r\n \r\n   newOrder.save();\r\n-  res.send(\" Order saved! \");\r\n-});\r\n+  res.send(\" Order saved! \")\r\n+})\r\n \r\n // const initDb = async () => {\r\n //   await Position.insertMany(data.positions)\r\n //   console.log(\"data was initial\")\r\n"
+                },
+                {
+                    "date": 1743000934006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n });\r\n \r\n // for adding new data\r\n app.post(\"/newOrder\", async (req, res) =>{\r\n-  let newOrder =await new Order({\r\n+  let newOrder = await new Order({\r\n     name : req.body.name,\r\n     qty :  req.body.number,\r\n     price : req.body.price,\r\n     mode : req.body.mode,\r\n"
+                },
+                {
+                    "date": 1743001183042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,20 +45,21 @@\n   // console.log(allPosition);\r\n });\r\n \r\n // for adding new data\r\n-app.post(\"/newOrder\", async (req, res) =>{\r\n+app.post(\"/newOrder\", async (req, res) => {\r\n   let newOrder = await new Order({\r\n-    name : req.body.name,\r\n-    qty :  req.body.number,\r\n-    price : req.body.price,\r\n-    mode : req.body.mode,\r\n-  })\r\n+    name: req.body.name,\r\n+    qty: req.body.qty,  // Now matching the client property\r\n+    price: req.body.price,\r\n+    mode: req.body.mode,\r\n+  });\r\n \r\n   newOrder.save();\r\n-  res.send(\" Order saved! \")\r\n-})\r\n+  res.send(\" Order saved! \");\r\n+});\r\n \r\n+\r\n // const initDb = async () => {\r\n //   await Position.insertMany(data.positions)\r\n //   console.log(\"data was initial\")\r\n // }\r\n"
+                }
+            ],
+            "date": 1742994737130,
+            "name": "Commit-0",
+            "content": "require(\"dotenv\").config();\r\n\r\nconst express = require(\"express\");\r\nconst app = express();\r\n\r\nconst mongoose = require(\"mongoose\");\r\n\r\nconst bodyParser = require('body-parser');\r\nconst cors = require(\"cors\")\r\n\r\nconst { Holding } = require(\"./model/HoldingModel\");\r\nconst { Position } = require(\"./model/PositionModel\");\r\nconst { Order } = require(\"./model/OrderModel\");\r\n// const data = require('../dashboard/src/data/data.js')\r\n\r\nconst PORT = process.env.PORT || 3002;\r\nconst MONG_URL = process.env.ATLAS_MONGO_URL;\r\n\r\napp.use(cors());\r\napp.use(bodyParser.json());\r\n\r\nmain()\r\n  .then(() => {\r\n    console.log(\"connected with mogoose\");\r\n  })\r\n  .catch((err) => {\r\n    console.log(\"not connected to mongoose\");\r\n  });\r\n\r\nasync function main() {\r\n  await mongoose.connect(MONG_URL);\r\n}\r\n\r\n// allHoldings\r\napp.get(\"/allHoldings\", async (req, res) => {\r\n  let allHoldings = await Holding.find({});\r\n  res.json(allHoldings)\r\n  // console.log(allHoldings);\r\n});\r\n\r\n// allPostion\r\napp.get(\"/allPositions\", async (req, res) => {\r\n  let allPosition = await Position.find({});\r\n  res.json(allPosition)\r\n  // console.log(allPosition);\r\n});\r\n\r\n// for adding new data\r\napp.post(\"/newOrder\", async (req, res) =>{\r\n  let newOrder =await new Order({\r\n    name : req.body.name,\r\n    qty :  req.body.number,\r\n    price : req.body.price,\r\n    mode : req.body.mode,\r\n  })\r\n\r\n  newOrder.save();\r\n  res.send(\" Order saved! \")\r\n})\r\n\r\n// const initDb = async () => {\r\n//   await Position.insertMany(data.positions)\r\n//   console.log(\"data was initial\")\r\n// }\r\n// initDb()\r\n\r\napp.listen(PORT, () => {\r\n  console.log(\"App is Started on port:\", PORT);\r\n});\r\n"
+        }
+    ]
+}

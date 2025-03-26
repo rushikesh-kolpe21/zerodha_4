@@ -46,18 +46,17 @@ app.get("/allPositions", async (req, res) => {
 });
 
 // for adding new data
-app.post("/newOrder", async (req, res) => {
-  let newOrder = await new Order({
-    name: req.body.name,
-    qty: req.body.qty,  // Now matching the client property
-    price: req.body.price,
-    mode: req.body.mode,
-  });
+app.post("/newOrder", async (req, res) =>{
+  let newOrder =await new Order({
+    name : req.body.name,
+    qty :  req.body.number,
+    price : req.body.price,
+    mode : req.body.mode,
+  })
 
   newOrder.save();
-  res.send(" Order saved! ");
-});
-
+  res.send(" Order saved! ")
+})
 
 // const initDb = async () => {
 //   await Position.insertMany(data.positions)

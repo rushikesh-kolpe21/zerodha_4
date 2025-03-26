@@ -14,11 +14,10 @@ import WatchList from "./WatchList";
 const Dashboard = () => {
   return (
     <div className="dashboard-container"> 
-        
-        
-     <GeneralContextProvider>
-     <WatchList />
-     </GeneralContextProvider>
+        <GeneralContextProvider>
+        <WatchList />
+        </GeneralContextProvider>
+     
       <div className="content">
         <Routes>
           <Route exact path="/" element={<Summary />} />
