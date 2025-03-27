@@ -1,0 +1,22 @@
+{
+    "sourceFile": "dashboard/vite.config.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1743089516424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743089612004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,7 @@\n-// vite.config.js\n-import { defineConfig } from 'vite';\n-import react from '@vitejs/plugin-react';\n+import { defineConfig } from 'vite'\n+import react from '@vitejs/plugin-react-swc'\n \n+// https://vite.dev/config/\n export default defineConfig({\n   plugins: [react()],\n-  optimizeDeps: {\n-    exclude: ['react-dom/client', 'axios', '@mui/material']\n-  }\n-});\n+})\n"
+                }
+            ],
+            "date": 1743089516423,
+            "name": "Commit-0",
+            "content": "// vite.config.js\nimport { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react';\n\nexport default defineConfig({\n  plugins: [react()],\n  optimizeDeps: {\n    exclude: ['react-dom/client', 'axios', '@mui/material']\n  }\n});\n"
+        }
+    ]
+}

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1742993580463,
@@ -20,6 +20,10 @@
                 {
                     "date": 1743001023961,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,37 +1,36 @@\n-import React, { useState } from \"react\";\r\n+import React from \"react\";\r\n+import { Route, Routes } from \"react-router-dom\";\r\n \r\n-import BuyActionWindow from \"./BuyActionWindow\";\r\n+import Apps from \"./Apps\";\r\n+import Funds from \"./Funds\";\r\n+import Holdings from \"./Holdings\";\r\n \r\n-const GeneralContext = React.createContext({\r\n-  openBuyWindow: (uid) => {},\r\n-  closeBuyWindow: () => {},\r\n-});\r\n+import Orders from \"./Orders\";\r\n+import Positions from \"./Positions\";\r\n+import Summary from \"./Summary\";\r\n+import WatchList from \"./WatchList\";\r\n+ import { GeneralContextProvider } from \"./GeneralContext\";\r\n \r\n-export const GeneralContextProvider = (props) => {\r\n-  const [isBuyWindowOpen, setIsBuyWindowOpen] = useState(false);\r\n-  const [selectedStockUID, setSelectedStockUID] = useState(\"\");\r\n-\r\n-  const handleOpenBuyWindow = (uid) => {\r\n-    setIsBuyWindowOpen(true);\r\n-    setSelectedStockUID(uid);\r\n-  };\r\n-\r\n-  const handleCloseBuyWindow = () => {\r\n-    setIsBuyWindowOpen(false);\r\n-    setSelectedStockUID(\"\");\r\n-  };\r\n-\r\n+const Dashboard = () => {\r\n   return (\r\n-    <GeneralContext.Provider\r\n-      value={{\r\n\\ No newline at end of file\n-        openBuyWindow: handleOpenBuyWindow,\r\n-        closeBuyWindow: handleCloseBuyWindow,\r\n-      }}\r\n-    >\r\n-      {props.children}\r\n-      {isBuyWindowOpen && <BuyActionWindow uid={selectedStockUID} />}\r\n-    </GeneralContext.Provider> \r\n+    <div className=\"dashboard-container\"> \r\n+        \r\n+        \r\n+     <GeneralContextProvider>\r\n+     <WatchList />\r\n+     </GeneralContextProvider>\r\n+      <div className=\"content\">\r\n+        <Routes>\r\n+          <Route exact path=\"/\" element={<Summary />} />\r\n+          <Route path=\"/orders\" element={<Orders />} />\r\n+          <Route path=\"/holdings\" element={<Holdings />} />\r\n+          <Route path=\"/positions\" element={<Positions />} />\r\n+          <Route path=\"/funds\" element={<Funds />} />\r\n+          <Route path=\"/apps\" element={<Apps />} />\r\n+        </Routes>\r\n+      </div>\r\n+    </div>\r\n   );\r\n };\r\n \r\n-export default GeneralContext;\n+export default Dashboard;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743076112621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,18 +8,16 @@\n import Orders from \"./Orders\";\r\n import Positions from \"./Positions\";\r\n import Summary from \"./Summary\";\r\n import WatchList from \"./WatchList\";\r\n- import { GeneralContextProvider } from \"./GeneralContext\";\r\n+import { GeneralContextProvider } from \"./GeneralContext\";\r\n \r\n const Dashboard = () => {\r\n   return (\r\n-    <div className=\"dashboard-container\"> \r\n-        \r\n-        \r\n-     <GeneralContextProvider>\r\n-     <WatchList />\r\n-     </GeneralContextProvider>\r\n+    <div className=\"dashboard-container\">\r\n+      <GeneralContextProvider>\r\n+        <WatchList />\r\n+      </GeneralContextProvider>\r\n       <div className=\"content\">\r\n         <Routes>\r\n           <Route exact path=\"/\" element={<Summary />} />\r\n           <Route path=\"/orders\" element={<Orders />} />\r\n"
                 }
             ],
             "date": 1742993580463,

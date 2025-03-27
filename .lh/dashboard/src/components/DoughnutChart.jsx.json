@@ -1,0 +1,18 @@
+{
+    "sourceFile": "dashboard/src/components/DoughnutChart.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1743099211597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1743099211597,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';\r\nimport { Doughnut } from 'react-chartjs-2';\r\n\r\nChartJS.register(ArcElement, Tooltip, Legend);\r\n\r\nexport function DoughnutChart(data) {\r\n  return <Doughnut data={data} />;\r\n}\r\n"
+        }
+    ]
+}

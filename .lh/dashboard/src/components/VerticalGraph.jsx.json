@@ -1,0 +1,18 @@
+{
+    "sourceFile": "dashboard/src/components/VerticalGraph.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1743090224918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1743090224918,
+            "name": "Commit-0",
+            "content": "import React from \"react\";\r\nimport {\r\n  Chart as ChartJS,\r\n  CategoryScale,\r\n  LinearScale,\r\n  BarElement,\r\n  Title,\r\n  Tooltip,\r\n  Legend,\r\n} from \"chart.js\";\r\nimport { Bar } from \"react-chartjs-2\";\r\n\r\nChartJS.register(\r\n  CategoryScale,\r\n  LinearScale,\r\n  BarElement,\r\n  Title,\r\n  Tooltip,\r\n  Legend\r\n);\r\n\r\nexport const options = {\r\n  responsive: true,\r\n  plugins: {\r\n    legend: {\r\n      position: \"top\",\r\n    },\r\n    title: {\r\n      display: true,\r\n      text: \"Holdings\",\r\n    },\r\n  },\r\n};\r\n\r\nexport function VerticalGraph({ data }) {\r\n  return <Bar options={options} data={data} />;\r\n}"
+        }
+    ]
+}

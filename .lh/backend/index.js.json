@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1742994737130,
@@ -24,6 +24,14 @@
                 {
                     "date": 1743001183042,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,20 +45,21 @@\n   // console.log(allPosition);\r\n });\r\n \r\n // for adding new data\r\n-app.post(\"/newOrder\", async (req, res) =>{\r\n+app.post(\"/newOrder\", async (req, res) => {\r\n   let newOrder = await new Order({\r\n-    name : req.body.name,\r\n-    qty :  req.body.number,\r\n-    price : req.body.price,\r\n-    mode : req.body.mode,\r\n-  })\r\n+    name: req.body.name,\r\n+    qty: req.body.qty,  // Now matching the client property\r\n+    price: req.body.price,\r\n+    mode: req.body.mode,\r\n+  });\r\n \r\n   newOrder.save();\r\n-  res.send(\" Order saved! \")\r\n-})\r\n+  res.send(\" Order saved! \");\r\n+});\r\n \r\n+\r\n // const initDb = async () => {\r\n //   await Position.insertMany(data.positions)\r\n //   console.log(\"data was initial\")\r\n // }\r\n"
+                },
+                {
+                    "date": 1743075646562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,15 +46,15 @@\n });\r\n \r\n // for adding new data\r\n app.post(\"/newOrder\", async (req, res) => {\r\n-  let newOrder = await new Order({\r\n+  let newOrder = new OrdersModel({\r\n     name: req.body.name,\r\n-    qty: req.body.qty,  // Now matching the client property\r\n+    qty: req.body.qty,\r\n     price: req.body.price,\r\n     mode: req.body.mode,\r\n   });\r\n-\r\n+  \r\n   newOrder.save();\r\n   res.send(\" Order saved! \");\r\n });\r\n \r\n"
+                },
+                {
+                    "date": 1743075683573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,9 @@\n     qty: req.body.qty,\r\n     price: req.body.price,\r\n     mode: req.body.mode,\r\n   });\r\n-  \r\n+\r\n   newOrder.save();\r\n   res.send(\" Order saved! \");\r\n });\r\n \r\n"
                 }
             ],
             "date": 1742994737130,

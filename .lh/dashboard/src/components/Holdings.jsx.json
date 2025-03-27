@@ -1,0 +1,114 @@
+{
+    "sourceFile": "dashboard/src/components/Holdings.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 24,
+            "patches": [
+                {
+                    "date": 1743086550922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743088202742,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     })\r\n }, []);\r\n \r\n // chart\r\n-const lables = allHoldings.map((subArray)=> subArray[\"name\"])\r\n+const lables = allHoldings.map((subArray)=> subArray[\"name\"]);\r\n \r\n   return (\r\n     <>\r\n       <h3 className=\"title\"> Holdings ({allHoldings.length})</h3>\r\n"
+                },
+                {
+                    "date": 1743088307475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,13 @@\n \r\n // chart\r\n const lables = allHoldings.map((subArray)=> subArray[\"name\"]);\r\n \r\n+const data ={\r\n+  label : \"dataset 1\",\r\n+  data: allHoldings.map((stock)=> stock.name)\r\n+}\r\n+\r\n   return (\r\n     <>\r\n       <h3 className=\"title\"> Holdings ({allHoldings.length})</h3>\r\n \r\n"
+                },
+                {
+                    "date": 1743088347584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,14 @@\n const lables = allHoldings.map((subArray)=> subArray[\"name\"]);\r\n \r\n const data ={\r\n   label : \"dataset 1\",\r\n-  data: allHoldings.map((stock)=> stock.name)\r\n+  datasets :[\r\n+    {\r\n+      data: allHoldings.map((stock)=> stock.name)\r\n+    }\r\n+  ]\r\n+  \r\n }\r\n \r\n   return (\r\n     <>\r\n"
+                },
+                {
+                    "date": 1743088392188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n // chart\r\n const lables = allHoldings.map((subArray)=> subArray[\"name\"]);\r\n \r\n const data ={\r\n-  label : \"dataset 1\",\r\n+  label : \"Stock Name\",\r\n   datasets :[\r\n     {\r\n       data: allHoldings.map((stock)=> stock.name)\r\n     }\r\n"
+                },
+                {
+                    "date": 1743088484711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,13 +22,13 @@\n const data ={\r\n   label : \"Stock Name\",\r\n   datasets :[\r\n     {\r\n-      data: allHoldings.map((stock)=> stock.name)\r\n-    }\r\n-  ]\r\n-  \r\n-}\r\n+      data: allHoldings.map((stock)=> stock.name),\r\n+      backgroundColor:\"rgba(255, 99, 132,0.5\",\r\n+    },\r\n+  ],\r\n+},\r\n \r\n   return (\r\n     <>\r\n       <h3 className=\"title\"> Holdings ({allHoldings.length})</h3>\r\n"
+                },
+                {
+                    "date": 1743088499439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,96 @@\n+\r\n+import React, {useState, useEffect} from \"react\";\r\n+\r\n+import axios from 'axios';\r\n+import { VerticalGraph } from \"./VerticalGraph\";\r\n+\r\n+//import {holdings} from '../data/data';\r\n+\r\n+const Holdings = () => {\r\n+\r\n+const [allHoldings, setAllHoldings] = useState([])\r\n+\r\n+useEffect(() => {\r\n+    axios.get(\"http://localhost:3002/allHoldings\").then((res) =>{\r\n+      setAllHoldings(res.data)\r\n+    })\r\n+}, []);\r\n+\r\n+// chart\r\n+const lables = allHoldings.map((subArray)=> subArray[\"name\"]);\r\n+\r\n+const data ={\r\n+  label : \"Stock Name\",\r\n+  datasets :[\r\n+    {\r\n+      data: allHoldings.map((stock)=> stock.name),\r\n+      backgroundColor:\"rgba(255, 99, 132,0.5\",\r\n+    },\r\n+  ],\r\n+}\r\n+\r\n+  return (\r\n+    <>\r\n+      <h3 className=\"title\"> Holdings ({allHoldings.length})</h3>\r\n+\r\n+      <div className=\"order-table\">\r\n+        <table>\r\n+          <tr>\r\n+            <th>Instrument</th>\r\n+            <th>Qty.</th>\r\n+            <th>Avg. cost</th>\r\n+            <th>LTP</th>\r\n+            <th>Cur.val</th>\r\n+            <th>P&L</th>\r\n+            <th>Net chg.</th>\r\n+            <th>Day chg.</th>\r\n+          </tr>\r\n+\r\n+          {allHoldings.map((stock, index)=> {\r\n+            const currValue = stock.price * stock.qty;\r\n+            const isProfit = currValue - stock.avg * stock.qty >= 0.0;\r\n+            const profClass = isProfit ? \"profit\" : \"loss\";\r\n+            const dayClass = stock.isLoss ? \"loss\" : \"profit\";     \r\n+                   \r\n+            return(\r\n+              <tr key={index}>\r\n+               <td>{stock.name}</td>\r\n+                <td>{stock.qty}</td>\r\n+                <td>{stock.avg.toFixed(2)}</td>\r\n+                <td>{stock.price.toFixed(2)}</td>\r\n+                <td>{currValue.toFixed(2)}</td>\r\n+                <td className={profClass}>\r\n+                  {(currValue - stock.avg * stock.qty).toFixed(2)}\r\n+                </td>\r\n+                <td className={profClass}>{stock.net}</td>\r\n+                <td className={dayClass}>{stock.day}</td>\r\n+              </tr>\r\n+            )\r\n+          })}\r\n+        </table>\r\n+      </div>\r\n+\r\n+      <div className=\"row\">\r\n+        <div className=\"col\">\r\n+          <h5>\r\n+            29,875.<span>55</span>{\" \"}\r\n+          </h5>\r\n+          <p>Total investment</p>\r\n+        </div>\r\n+        <div className=\"col\">\r\n+          <h5>\r\n+            31,428.<span>95</span>{\" \"}\r\n+          </h5>\r\n+          <p>Current value</p>\r\n+        </div>\r\n+        <div className=\"col\">\r\n+          <h5>1,553.40 (+5.20%)</h5>\r\n+          <p>P&L</p>\r\n+        </div>\r\n+      </div>\r\n+      <VerticalGraph  data={data}/>\r\n+    </>\r\n+  );\r\n+};\r\n+\r\n+export default Holdings;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1743090092679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,116 +16,21 @@\n     })\r\n }, []);\r\n \r\n // chart\r\n-const lables = allHoldings.map((subArray)=> subArray[\"name\"]);\r\n+const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n \r\n-const data ={\r\n-  label : \"Stock Name\",\r\n-  datasets :[\r\n+const data = {\r\n+  labels,\r\n+  datasets: [\r\n     {\r\n-      data: allHoldings.map((stock)=> stock.name),\r\n-      backgroundColor:\"rgba(255, 99, 132,0.5\",\r\n+      label: \"Stock Price\",\r\n+      data: allHoldings.map((stock) => stock.price),\r\n+      backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n     },\r\n   ],\r\n-}\r\n-\r\n-  return (\r\n-    <>\r\n-      <h3 className=\"title\"> Holdings ({allHoldings.length})</h3>\r\n-\r\n-      <div className=\"order-table\">\r\n-        <table>\r\n-          <tr>\r\n-            <th>Instrument</th>\r\n-            <th>Qty.</th>\r\n-            <th>Avg. cost</th>\r\n-            <th>LTP</th>\r\n-            <th>Cur.val</th>\r\n-            <th>P&L</th>\r\n-            <th>Net chg.</th>\r\n-            <th>Day chg.</th>\r\n-          </tr>\r\n-\r\n-          {allHoldings.map((stock, index)=> {\r\n-            const currValue = stock.price * stock.qty;\r\n-            const isProfit = currValue - stock.avg * stock.qty >= 0.0;\r\n-            const profClass = isProfit ? \"profit\" : \"loss\";\r\n-            const dayClass = stock.isLoss ? \"loss\" : \"profit\";     \r\n-                   \r\n-            return(\r\n-              <tr key={index}>\r\n-               <td>{stock.name}</td>\r\n-                <td>{stock.qty}</td>\r\n-                <td>{stock.avg.toFixed(2)}</td>\r\n-                <td>{stock.price.toFixed(2)}</td>\r\n-                <td>{currValue.toFixed(2)}</td>\r\n-                <td className={profClass}>\r\n-                  {(currValue - stock.avg * stock.qty).toFixed(2)}\r\n-                </td>\r\n-                <td className={profClass}>{stock.net}</td>\r\n-                <td className={dayClass}>{stock.day}</td>\r\n-              </tr>\r\n-            )\r\n-          })}\r\n-        </table>\r\n-      </div>\r\n-\r\n-      <div className=\"row\">\r\n-        <div className=\"col\">\r\n-          <h5>\r\n-            29,875.<span>55</span>{\" \"}\r\n-          </h5>\r\n-          <p>Total investment</p>\r\n-        </div>\r\n-        <div className=\"col\">\r\n-          <h5>\r\n-            31,428.<span>95</span>{\" \"}\r\n-          </h5>\r\n-          <p>Current value</p>\r\n-        </div>\r\n-        <div className=\"col\">\r\n-          <h5>1,553.40 (+5.20%)</h5>\r\n-          <p>P&L</p>\r\n-        </div>\r\n-      </div>\r\n-      <VerticalGraph  data={data}/>\r\n-    </>\r\n-  );\r\n };\r\n \r\n-export default Holdings;\n-\r\n-import React, {useState, useEffect} from \"react\";\r\n-\r\n-import axios from 'axios';\r\n-import { VerticalGraph } from \"./VerticalGraph\";\r\n-\r\n-//import {holdings} from '../data/data';\r\n-\r\n-const Holdings = () => {\r\n-\r\n-const [allHoldings, setAllHoldings] = useState([])\r\n-\r\n-useEffect(() => {\r\n-    axios.get(\"http://localhost:3002/allHoldings\").then((res) =>{\r\n-      setAllHoldings(res.data)\r\n-    })\r\n-}, []);\r\n-\r\n-// chart\r\n-const lables = allHoldings.map((subArray)=> subArray[\"name\"]);\r\n-\r\n-const data ={\r\n-  label : \"Stock Name\",\r\n-  datasets :[\r\n-    {\r\n-      data: allHoldings.map((stock)=> stock.name),\r\n-      backgroundColor:\"rgba(255, 99, 132,0.5\",\r\n-    },\r\n-  ],\r\n-},\r\n-\r\n   return (\r\n     <>\r\n       <h3 className=\"title\"> Holdings ({allHoldings.length})</h3>\r\n \r\n"
+                },
+                {
+                    "date": 1743091817895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n               <tr key={index}>\r\n                <td>{stock.name}</td>\r\n                 <td>{stock.qty}</td>\r\n                 <td>{stock.avg.toFixed(2)}</td>\r\n-                <td>{stock.price.toFixed(2)}</td>\r\n+                <td>{stock.price.toFixed(3)}</td>\r\n                 <td>{currValue.toFixed(2)}</td>\r\n                 <td className={profClass}>\r\n                   {(currValue - stock.avg * stock.qty).toFixed(2)}\r\n                 </td>\r\n"
+                },
+                {
+                    "date": 1743091826934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n               <tr key={index}>\r\n                <td>{stock.name}</td>\r\n                 <td>{stock.qty}</td>\r\n                 <td>{stock.avg.toFixed(2)}</td>\r\n-                <td>{stock.price.toFixed(3)}</td>\r\n+                <td>{stock.price.toFixed(2)}</td>\r\n                 <td>{currValue.toFixed(2)}</td>\r\n                 <td className={profClass}>\r\n                   {(currValue - stock.avg * stock.qty).toFixed(2)}\r\n                 </td>\r\n"
+                },
+                {
+                    "date": 1743092147200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     })\r\n }, []);\r\n \r\n // chart\r\n-const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n+const labels = allHoldings.map((subArray) => subArray.name);\r\n \r\n const data = {\r\n   labels,\r\n   datasets: [\r\n"
+                },
+                {
+                    "date": 1743092160843,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     })\r\n }, []);\r\n \r\n // chart\r\n-const labels = allHoldings.map((subArray) => subArray.name);\r\n+const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n \r\n const data = {\r\n   labels,\r\n   datasets: [\r\n"
+                },
+                {
+                    "date": 1743092301691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n // chart\r\n const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n \r\n const data = {\r\n-  labels,\r\n+  labels, // labels send as name\r\n   datasets: [\r\n     {\r\n       label: \"Stock Price\",\r\n       data: allHoldings.map((stock) => stock.price),\r\n"
+                },
+                {
+                    "date": 1743092314820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n \r\n const data = {\r\n   labels, // labels send as name\r\n-  datasets: [\r\n+  datasets: [ // price\r\n     {\r\n       label: \"Stock Price\",\r\n       data: allHoldings.map((stock) => stock.price),\r\n       backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n"
+                },
+                {
+                    "date": 1743092539809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,17 +18,19 @@\n \r\n // chart\r\n const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n \r\n+datasets: [ // price\r\n+  {\r\n+    label: \"Stock Price\",\r\n+    data: allHoldings.map((stock) => stock.price),\r\n+    backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n+  },\r\n+]\r\n+\r\n const data = {\r\n   labels, // labels send as name\r\n-  datasets: [ // price\r\n-    {\r\n-      label: \"Stock Price\",\r\n-      data: allHoldings.map((stock) => stock.price),\r\n-      backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n-    },\r\n-  ],\r\n+  dataset\r\n };\r\n \r\n   return (\r\n     <>\r\n"
+                },
+                {
+                    "date": 1743092556293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n ]\r\n \r\n const data = {\r\n   labels, // labels send as name\r\n-  dataset\r\n+  datasets\r\n };\r\n \r\n   return (\r\n     <>\r\n"
+                },
+                {
+                    "date": 1743092606336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,19 +18,17 @@\n \r\n // chart\r\n const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n \r\n-datasets: [ // price\r\n-  {\r\n-    label: \"Stock Price\",\r\n-    data: allHoldings.map((stock) => stock.price),\r\n-    backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n-  },\r\n-]\r\n-\r\n const data = {\r\n   labels, // labels send as name\r\n-  datasets\r\n+  datasets: [ // price\r\n+    {\r\n+      label: \"Stock Price\",\r\n+      data: allHoldings.map((stock) => stock.price),\r\n+      backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n+    },\r\n+  ],\r\n };\r\n \r\n   return (\r\n     <>\r\n"
+                },
+                {
+                    "date": 1743092811700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,17 +18,19 @@\n \r\n // chart\r\n const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n \r\n+  let  datasets = [ // price\r\n+  {\r\n+    label: \"Stock Price\",\r\n+    data: allHoldings.map((stock) => stock.price),\r\n+    backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n+  },\r\n+]\r\n+\r\n const data = {\r\n   labels, // labels send as name\r\n-  datasets: [ // price\r\n-    {\r\n-      label: \"Stock Price\",\r\n-      data: allHoldings.map((stock) => stock.price),\r\n-      backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n-    },\r\n-  ],\r\n+  datasets\r\n };\r\n \r\n   return (\r\n     <>\r\n"
+                },
+                {
+                    "date": 1743092833679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,9 @@\n }, []);\r\n \r\n // chart\r\n const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n-\r\n-  let  datasets = [ // price\r\n+const datasets = [ // price\r\n   {\r\n     label: \"Stock Price\",\r\n     data: allHoldings.map((stock) => stock.price),\r\n     backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n"
+                },
+                {
+                    "date": 1743092839610,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     label: \"Stock Price\",\r\n     data: allHoldings.map((stock) => stock.price),\r\n     backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n   },\r\n-]\r\n+];\r\n \r\n const data = {\r\n   labels, // labels send as name\r\n   datasets\r\n"
+                },
+                {
+                    "date": 1743092847373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n ];\r\n \r\n const data = {\r\n   labels, // labels send as name\r\n-  datasets\r\n+  datasets // price\r\n };\r\n \r\n   return (\r\n     <>\r\n"
+                },
+                {
+                    "date": 1743092853595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     })\r\n }, []);\r\n \r\n // chart\r\n-const labels = allHoldings.map((subArray) => subArray[\"name\"]);\r\n+const labels = allHoldings.map((subArray) => subArray[\"name\"]); // labels send as name\r\n const datasets = [ // price\r\n   {\r\n     label: \"Stock Price\",\r\n     data: allHoldings.map((stock) => stock.price),\r\n"
+                },
+                {
+                    "date": 1743092958118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n const datasets = [ // price\r\n   {\r\n     label: \"Stock Price\",\r\n     data: allHoldings.map((stock) => stock.price),\r\n-    backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n+    \r\n   },\r\n ];\r\n \r\n const data = {\r\n"
+                },
+                {
+                    "date": 1743092995262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n const datasets = [ // price\r\n   {\r\n     label: \"Stock Price\",\r\n     data: allHoldings.map((stock) => stock.price),\r\n-    \r\n+    backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n   },\r\n ];\r\n \r\n const data = {\r\n"
+                },
+                {
+                    "date": 1743093004861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n const labels = allHoldings.map((subArray) => subArray[\"name\"]); // labels send as name\r\n const datasets = [ // price\r\n   {\r\n     label: \"Stock Price\",\r\n-    data: allHoldings.map((stock) => stock.price),\r\n+    // data: allHoldings.map((stock) => stock.price),\r\n     backgroundColor: \"rgba(255, 99, 132, 0.5)\",\r\n   },\r\n ];\r\n \r\n"
+                }
+            ],
+            "date": 1743086550922,
+            "name": "Commit-0",
+            "content": "\r\nimport React, {useState, useEffect} from \"react\";\r\n\r\nimport axios from 'axios';\r\nimport { VerticalGraph } from \"./VerticalGraph\";\r\n\r\n//import {holdings} from '../data/data';\r\n\r\nconst Holdings = () => {\r\n\r\nconst [allHoldings, setAllHoldings] = useState([])\r\n\r\nuseEffect(() => {\r\n    axios.get(\"http://localhost:3002/allHoldings\").then((res) =>{\r\n      setAllHoldings(res.data)\r\n    })\r\n}, []);\r\n\r\n// chart\r\nconst lables = allHoldings.map((subArray)=> subArray[\"name\"])\r\n\r\n  return (\r\n    <>\r\n      <h3 className=\"title\"> Holdings ({allHoldings.length})</h3>\r\n\r\n      <div className=\"order-table\">\r\n        <table>\r\n          <tr>\r\n            <th>Instrument</th>\r\n            <th>Qty.</th>\r\n            <th>Avg. cost</th>\r\n            <th>LTP</th>\r\n            <th>Cur.val</th>\r\n            <th>P&L</th>\r\n            <th>Net chg.</th>\r\n            <th>Day chg.</th>\r\n          </tr>\r\n\r\n          {allHoldings.map((stock, index)=> {\r\n            const currValue = stock.price * stock.qty;\r\n            const isProfit = currValue - stock.avg * stock.qty >= 0.0;\r\n            const profClass = isProfit ? \"profit\" : \"loss\";\r\n            const dayClass = stock.isLoss ? \"loss\" : \"profit\";     \r\n                   \r\n            return(\r\n              <tr key={index}>\r\n               <td>{stock.name}</td>\r\n                <td>{stock.qty}</td>\r\n                <td>{stock.avg.toFixed(2)}</td>\r\n                <td>{stock.price.toFixed(2)}</td>\r\n                <td>{currValue.toFixed(2)}</td>\r\n                <td className={profClass}>\r\n                  {(currValue - stock.avg * stock.qty).toFixed(2)}\r\n                </td>\r\n                <td className={profClass}>{stock.net}</td>\r\n                <td className={dayClass}>{stock.day}</td>\r\n              </tr>\r\n            )\r\n          })}\r\n        </table>\r\n      </div>\r\n\r\n      <div className=\"row\">\r\n        <div className=\"col\">\r\n          <h5>\r\n            29,875.<span>55</span>{\" \"}\r\n          </h5>\r\n          <p>Total investment</p>\r\n        </div>\r\n        <div className=\"col\">\r\n          <h5>\r\n            31,428.<span>95</span>{\" \"}\r\n          </h5>\r\n          <p>Current value</p>\r\n        </div>\r\n        <div className=\"col\">\r\n          <h5>1,553.40 (+5.20%)</h5>\r\n          <p>P&L</p>\r\n        </div>\r\n      </div>\r\n      <VerticalGraph  data={data}/>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default Holdings;"
+        }
+    ]
+}

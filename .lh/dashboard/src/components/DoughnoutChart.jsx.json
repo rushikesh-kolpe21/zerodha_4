@@ -1,0 +1,42 @@
+{
+    "sourceFile": "dashboard/src/components/DoughnoutChart.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1743095089128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1743095418275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,34 +3,9 @@\n import { Doughnut } from 'react-chartjs-2';\r\n \r\n ChartJS.register(ArcElement, Tooltip, Legend);\r\n \r\n-export const data = {\r\n-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],\r\n-  datasets: [\r\n-    {\r\n-      label: '# of Votes',\r\n-      data: [12, 19, 3, 5, 2, 3],\r\n-      backgroundColor: [\r\n-        'rgba(255, 99, 132, 0.2)',\r\n-        'rgba(54, 162, 235, 0.2)',\r\n-        'rgba(255, 206, 86, 0.2)',\r\n-        'rgba(75, 192, 192, 0.2)',\r\n-        'rgba(153, 102, 255, 0.2)',\r\n-        'rgba(255, 159, 64, 0.2)',\r\n-      ],\r\n-      borderColor: [\r\n-        'rgba(255, 99, 132, 1)',\r\n-        'rgba(54, 162, 235, 1)',\r\n-        'rgba(255, 206, 86, 1)',\r\n-        'rgba(75, 192, 192, 1)',\r\n-        'rgba(153, 102, 255, 1)',\r\n-        'rgba(255, 159, 64, 1)',\r\n-      ],\r\n-      borderWidth: 1,\r\n-    },\r\n-  ],\r\n-};\r\n \r\n+\r\n export function DoughnutChart() {\r\n   return <Doughnut data={data} />;\r\n }\r\n"
+                },
+                {
+                    "date": 1743095457395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n ChartJS.register(ArcElement, Tooltip, Legend);\r\n \r\n \r\n \r\n-export function DoughnutChart() {\r\n+export function DoughnutChart(data) {\r\n   return <Doughnut data={data} />;\r\n }\r\n"
+                },
+                {
+                    "date": 1743095487334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,7 @@\n import { Doughnut } from 'react-chartjs-2';\r\n \r\n ChartJS.register(ArcElement, Tooltip, Legend);\r\n \r\n-\r\n-\r\n export function DoughnutChart(data) {\r\n   return <Doughnut data={data} />;\r\n }\r\n"
+                },
+                {
+                    "date": 1743097040022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n import { Doughnut } from 'react-chartjs-2';\r\n \r\n ChartJS.register(ArcElement, Tooltip, Legend);\r\n \r\n-export function DoughnutChart(data) {\r\n+export function DoughnoutChart(data) {\r\n   return <Doughnut data={data} />;\r\n }\r\n"
+                },
+                {
+                    "date": 1743099111093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n import { Doughnut } from 'react-chartjs-2';\r\n \r\n ChartJS.register(ArcElement, Tooltip, Legend);\r\n \r\n-export function DoughnoutChart(data) {\r\n+export function DoughnutChart(data) {\r\n   return <Doughnut data={data} />;\r\n }\r\n"
+                },
+                {
+                    "date": 1743099129285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n import { Doughnut } from 'react-chartjs-2';\r\n \r\n ChartJS.register(ArcElement, Tooltip, Legend);\r\n \r\n-export function DoughnutChart(data) {\r\n+export function DoughnoutChart(data) {\r\n   return <Doughnut data={data} />;\r\n }\r\n"
+                }
+            ],
+            "date": 1743095089128,
+            "name": "Commit-0",
+            "content": "import React from 'react';\r\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';\r\nimport { Doughnut } from 'react-chartjs-2';\r\n\r\nChartJS.register(ArcElement, Tooltip, Legend);\r\n\r\nexport const data = {\r\n  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],\r\n  datasets: [\r\n    {\r\n      label: '# of Votes',\r\n      data: [12, 19, 3, 5, 2, 3],\r\n      backgroundColor: [\r\n        'rgba(255, 99, 132, 0.2)',\r\n        'rgba(54, 162, 235, 0.2)',\r\n        'rgba(255, 206, 86, 0.2)',\r\n        'rgba(75, 192, 192, 0.2)',\r\n        'rgba(153, 102, 255, 0.2)',\r\n        'rgba(255, 159, 64, 0.2)',\r\n      ],\r\n      borderColor: [\r\n        'rgba(255, 99, 132, 1)',\r\n        'rgba(54, 162, 235, 1)',\r\n        'rgba(255, 206, 86, 1)',\r\n        'rgba(75, 192, 192, 1)',\r\n        'rgba(153, 102, 255, 1)',\r\n        'rgba(255, 159, 64, 1)',\r\n      ],\r\n      borderWidth: 1,\r\n    },\r\n  ],\r\n};\r\n\r\nexport function DoughnutChart() {\r\n  return <Doughnut data={data} />;\r\n}\r\n"
+        }
+    ]
+}
