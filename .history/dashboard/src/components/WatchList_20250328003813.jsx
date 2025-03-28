@@ -4,7 +4,7 @@ import {Tooltip, Grow} from "@mui/material";
 import {watchlist} from '../data/data';
 
 import {BarChartOutlined, KeyboardArrowDown, KeyboardArrowUp, MoreHoriz} from '@mui/icons-material';
-// import { DoughnutChart } from "./DoughnutChart";
+import { DoughnutChart } from "./DoughnutChart";
 
 
 //  const labels = watchlist.map((subArray)=> subArray.name);
@@ -57,7 +57,7 @@ const WatchList = () => {
           )
            })}
       </ul>
-      {/* <DoughnutChart data={data}/> */}
+      <DoughnutChart data={data}/>
     </div>
   );
 };
